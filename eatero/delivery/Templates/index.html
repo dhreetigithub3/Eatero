@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eatero - Find your true taste!</title>
+    {% load static %}
+    <link href="{% static 'style.css' %}" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="navbar-inner">
+            <a href="{% url 'say_hello' %}" class="brand">
+                <div class="logo">E</div>
+                <span>Eatero</span>
+            </a>
+            <div class="nav-links">
+                <a href="{% url 'open_signin' %}">Sign in</a>
+                <a href="{% url 'open_signup' %}" class="btn-primary">Get Started</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section class="hero">
+            <h1>Eatero &#127829;</h1>
+            <p>Find your true taste! Discover the best restaurants near you and enjoy a quick, seamless ordering
+                experience.</p>
+            <div class="hero-actions">
+                <a href="{% url 'open_signup' %}" class="btn btn-primary">Start Exploring</a>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>

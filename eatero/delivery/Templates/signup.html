@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Eatero</title>
+    <link href="{% static 'style.css' %}" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="navbar-inner">
+            <a href="{% url 'say_hello' %}" class="brand">
+                <div class="logo">E</div>
+                <span>Eatero</span>
+            </a>
+            <div class="nav-links">
+                <a href="{% url 'open_signin' %}">Already have an account? Sign in</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="form-card">
+            <h3 class="text-center mb-2">Create Account</h3>
+            <form action="{% url 'signup' %}" method="POST" novalidate>
+                {% csrf_token %}
+                
+                {% if form.errors %}
+                <div class="card mb-2" style="border-left: 4px solid var(--primary); background: #fff5f5;">
+                    <div class="card-body" style="padding: 1rem; color: var(--primary); font-size: 0.85rem;">
+                        <strong>Please fix the errors below:</strong>
+                        <ul style="margin-top: 0.5rem; padding-left: 1.2rem;">
+                            {% for field, errors in form.errors.items %}
+                                {% for error in errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                {% endif %}
+
+                {% for field in form %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.help_text %}
+                        <small style="color: var(--text-muted);">{{ field.help_text }}</small>
+                    {% endif %}
+                </div>
+                {% endfor %}
+
+                <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+            </form>
+        </div>
+    </main>
+</body>
+
+</html>

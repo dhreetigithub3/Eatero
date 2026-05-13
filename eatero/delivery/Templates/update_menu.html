@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Menu - {{ restaurant.name }}</title>
+    <link href="{% static 'style.css' %}" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="navbar-inner">
+            <a href="{% url 'say_hello' %}" class="brand">
+                <div class="logo">E</div>
+                <span>Eatero Admin</span>
+            </a>
+            <div class="nav-links">
+                <a href="{% url 'open_show_restaurant' %}" class="btn btn-outline">Back to Restaurants</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <header class="mb-2">
+            <h2>Menu for {{ restaurant.name }}</h2>
+
+            <div class="add_item_action">
+                <a href="{% url 'open_add_item' restaurant.id %}" class="btn btn-success btn-sm add-item-btn">
+                    + Add New Item
+                </a>
+            </div>
+        </header>
+
+        <section class="mb-2">
+            <h3>Current Menu</h3>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Price</th>
+                            <th>Veg ?</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in itemList %}
+                        <tr>
+                            <td>
+                                <img src="{{ item.picture }}" class="mini-img">
+                            </td>
+                            <td style="font-weight: 600;">{{ item.name }}</td>
+                            <td style="color: var(--text-muted);">{{ item.description }}</td>
+                            <td style="font-weight: 600;">Rs.{{ item.price }}</td>
+                            <td>
+                                {% if item.vegeterian %}
+                                <span class="badge badge-success">Veg</span>
+                                {% else %}
+                                <span class="badge badge-warning">Non-Veg</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <div class="actions">
+                                    <a href="{% url 'open_edit_item' item.id restaurant.id %}" class="btn btn-outline"
+                                        style="font-size: 0.8rem;">Edit</a>
+                                    <a href="{% url 'delete_item_menu' item.id restaurant.id %}" class="btn btn-danger"
+                                        style="font-size: 0.8rem;">Delete</a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>

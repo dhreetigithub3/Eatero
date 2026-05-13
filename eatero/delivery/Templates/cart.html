@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart - Eatero</title>
+    <link href="{% static 'style.css' %}" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="navbar-inner">
+            <a href="{% url 'say_hello' %}" class="brand">
+                <div class="logo">E</div>
+                <span>Eatero</span>
+            </a>
+            <div class="nav-links">
+                <a href="{% url 'customer_home' username %}" class="btn btn-outline">Back to Restaurants</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <header class="mb-2">
+            <h2>Your Cart</h2>
+            <p style="color: var(--text-muted);">Hi {{username}}, review your items before checkout.</p>
+        </header>
+
+        {% if itemList %}
+        <div class="table-wrap mb-2">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in itemList %}
+                    <tr>
+                        <td>
+                            <img src="{{ item.picture }}" class="mini-img" alt="{{ item.name }}">
+                        </td>
+                        <td style="font-weight: 600;">{{ item.name }}</td>
+                        <td style="color: var(--text-muted); max-width: 300px;">{{ item.description }}</td>
+                        <td style="font-weight: 600;">₹{{ item.price }}</td>
+                        <td>
+                            <a href="{% url 'delete_item_cart' item.id username %}" class="btn btn-danger" style="font-size: 0.85rem; padding: 0.5rem 1rem;">Remove</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end;">
+            <div class="card" style="width: 100%; max-width: 400px;">
+                <div class="card-body">
+                    <h3 class="card-title">Order Summary</h3>
+                    <div style="display: flex; justify-content: space-between; margin: 1.5rem 0; align-items: baseline;">
+                        <span style="font-weight: 500; color: var(--text-muted);">Total Amount</span>
+                        <span style="font-weight: 800; font-size: 1.75rem; color: var(--primary);">₹{{ total_price }}</span>
+                    </div>
+                    <form action="{% url 'checkout' username %}">
+                        <button class="btn btn-primary btn-block" style="padding: 1rem;">
+                            Proceed to Checkout
+                        </button>
+                    </form>
+                    <p class="text-center mt-1" style="font-size: 0.85rem; color: var(--text-muted);">
+                        Secure checkout via Razorpay
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="hero">
+            <div class="logo" style="margin: 0 auto 1.5rem; width: 60px; height: 60px; font-size: 2rem;">!</div>
+            <h1>Your cart is empty</h1>
+            <p>Looks like you haven't added anything to your cart yet.</p>
+            <a href="{% url 'customer_home' username %}" class="btn btn-primary mt-1">Browse Restaurants</a>
+        </div>
+        {% endif %}
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Item - Eatero Admin</title>
+    <link href="{% static 'style.css' %}" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="navbar-inner">
+            <a href="{% url 'say_hello' %}" class="brand">
+                <div class="logo">E</div>
+                <span>Eatero Admin</span>
+            </a>
+            <div class="nav-links">
+                <a href="javascript:history.back()" class="btn btn-outline">Back to Menu</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="form-card">
+            <h3 class="text-center mb-2">Edit Menu Item</h3>
+            <form action="{% url 'edit_item' item.id restaurant_id %}" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="name">Item Name</label>
+                    <input type="text" id="name" name="name" class="form-control" value="{{item.name}}" required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" class="form-control" rows="3"
+                        required>{{item.description}}</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="price">Price (₹)</label>
+                    <input type="number" id="price" name="price" class="form-control" step="0.01" value="{{item.price}}"
+                        required>
+                </div>
+                <div class="form-group" style="display: flex; align-items: center; gap: 10px;">
+                    <input type="checkbox" id="vegeterian" name="vegeterian" {% if item.vegeterian %} checked {% endif %}>
+                    <label for="vegeterian" style="margin-bottom: 0;">Vegetarian</label>
+                </div>
+                <div class="form-group">
+                    <label for="picture">Image URL</label>
+                    <input type="url" id="picture" name="picture" class="form-control" value="{{item.picture}}">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Update Item</button>
+            </form>
+            <div class="text-center mt-1">
+                <a href="javascript:history.back()" class="text-muted"
+                    style="text-decoration: none; font-size: 0.9rem;">← Cancel and go back</a>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

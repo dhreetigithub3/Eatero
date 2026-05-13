@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Restaurant - Eatero Admin</title>
+    <link href="{% static 'style.css' %}" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="navbar-inner">
+            <a href="{% url 'say_hello' %}" class="brand">
+                <div class="logo">E</div>
+                <span>Eatero Admin</span>
+            </a>
+            <div class="nav-links">
+                <a href="{% url 'open_show_restaurant' %}" class="btn btn-outline">All Restaurants</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="form-card">
+            <h3 class="text-center mb-2">Add New Restaurant</h3>
+            <form action="{% url 'add_restaurant' %}" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="name">Restaurant Name</label>
+                    <input type="text" name="name" id="name" class="form-control" placeholder="e.g. Pizza Palace"
+                        required>
+                </div>
+                <div class="form-group">
+                    <label for="picture">Picture URL</label>
+                    <input type="text" name="picture" id="picture" class="form-control"
+                        placeholder="https://example.com/image.jpg" required>
+                </div>
+                <div class="form-group">
+                    <label for="cuisine">Cuisine</label>
+                    <input type="text" name="cuisine" id="cuisine" class="form-control"
+                        placeholder="e.g. Italian, Fast Food" required>
+                </div>
+                <div class="form-group">
+                    <label for="rating">Rating (0-5)</label>
+                    <input type="number" name="rating" id="rating" class="form-control" min="0" max="5" step="0.1"
+                        value="4.0" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Add Restaurant</button>
+            </form>
+            <div class="text-center mt-1">
+                <a href="javascript:history.back()" class="text-muted"
+                    style="text-decoration: none; font-size: 0.9rem;">← Cancel and go back</a>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

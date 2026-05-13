@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Eatero</title>
+    <link href="{% static 'style.css' %}" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="navbar-inner">
+            <a href="{% url 'say_hello' %}" class="brand">
+                <div class="logo">E</div>
+                <span>Eatero Admin</span>
+            </a>
+            <div class="nav-links">
+                <a href="{% url 'say_hello' %}">Sign Out</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <header class="hero" style="padding: 2rem; margin-bottom: 2rem;">
+            <h1>Welcome to Admin Dashboard!</h1>
+            <p>Manage your restaurants and menus from here.</p>
+        </header>
+
+        <div class="grid">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">Add Restaurant</h3>
+                    <p class="card-text">Onboard a new restaurant to the platform.</p>
+                </div>
+                <div class="card-footer">
+                    <a href="{% url 'open_add_restaurant' %}" class="btn btn-primary btn-block">Add New</a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">Manage Restaurants</h3>
+                    <p class="card-text">View, edit, or remove existing restaurants and their menus.</p>
+                </div>
+                <div class="card-footer">
+                    <a href="{% url 'open_show_restaurant' %}" class="btn btn-primary btn-block">View All</a>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

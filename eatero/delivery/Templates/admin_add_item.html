@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Item - {{ restaurant.name }}</title>
+    <link href="{% static 'style.css' %}" rel="stylesheet">
+</head>
+<body>
+    <main>
+        <section class="form-card" style="max-width: 600px; margin: 0 auto;">
+            <h3 class="mb-2">Add New Menu Item</h3>
+            <form action="{% url 'update_menu' restaurant.id %}" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="name">Item Name</label>
+                    <input type="text" id="name" name="name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" class="form-control" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="price">Price (₹)</label>
+                    <input type="number" id="price" name="price" class="form-control" step="0.01" required>
+                </div>
+                <div class="form-group" style="display: flex; align-items: center; gap: 10px;">
+                    <input type="checkbox" id="vegeterian" name="vegeterian">
+                    <label for="vegeterian" style="margin-bottom: 0;">Vegetarian</label>
+                </div>
+                <div class="form-group">
+                    <label for="picture">Image URL</label>
+                    <input type="url" id="picture" name="picture" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Add Item to Menu</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

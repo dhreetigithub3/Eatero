@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ restaurant.name }} Menu - Eatero</title>
+    <link href="{% static 'style.css' %}" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="navbar-inner">
+            <a href="{% url 'say_hello' %}" class="brand">
+                <div class="logo">E</div>
+                <span>Eatero</span>
+            </a>
+            <div class="nav-links">
+                <a href="{% url 'show_cart' username %}" class="btn btn-outline">Cart</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <header class="hero" style="padding: 2rem; margin-bottom: 2rem; text-align: left;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <h1>{{ restaurant.name }}</h1>
+                    <p>{{ restaurant.cuisine }} • <span class="badge badge-warning">★ {{ restaurant.rating }}</span></p>
+                </div>
+                <a href="{% url 'customer_home' username %}" class="btn btn-outline">Back to Restaurants</a>
+            </div>
+        </header>
+
+        <h2 class="mb-2">Menu Items</h2>
+        <div class="grid">
+            {% for item in itemList %}
+            <div class="card">
+                <img src="{{ item.picture }}" alt="{{ item.name }}" class="card-img">
+                <div class="card-body">
+                    <div style="display: flex; justify-content: space-between; align-items: start;">
+                        <h3 class="card-title">{{ item.name }}</h3>
+                        {% if item.vegeterian %}
+                        <span class="badge badge-success">Veg</span>
+                        {% endif %}
+                    </div>
+                    <p class="card-text">{{ item.description }}</p>
+                </div>
+                <div class="card-footer">
+                    <span style="font-weight: 700; font-size: 1.25rem;">Rs. {{ item.price }}</span>
+                    <a href="{% url 'add_to_cart' item.id username %}" class="btn btn-primary">Add to Cart</a>
+                </div>
+            </div>
+            {% empty %}
+            <div class="hero">
+                <p>This restaurant hasn't added any menu items yet.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </main>
+</body>
+
+</html>

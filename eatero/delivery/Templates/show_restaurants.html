@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Restaurants - Eatero</title>
+    <link href="{% static 'style.css' %}" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="navbar-inner">
+            <a href="{% url 'say_hello' %}" class="brand">
+                <div class="logo">E</div>
+                <span>Eatero Admin</span>
+            </a>
+            <div class="nav-links">
+                <a href="{% url 'open_add_restaurant' %}" class="btn btn-primary">Add Restaurant</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <header class="mb-2" style="display: flex; justify-content: space-between; align-items: center;">
+            <h2>All Restaurants</h2>
+            <a href="{% url 'signin' %}" class="btn btn-outline">Back to Dashboard</a>
+        </header>
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Restaurant</th>
+                        <th>Name</th>
+                        <th>Cuisine</th>
+                        <th>Rating</th>
+                        <th>Operations</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for r in restaurantList %}
+                    <tr>
+                        <td>
+                            <img src="{{ r.picture }}" class="mini-img">
+                        </td>
+                        <td style="font-weight: 600;">{{ r.name }}</td>
+                        <td>{{ r.cuisine }}</td>
+                        <td><span class="badge badge-warning">★ {{ r.rating }}</span></td>
+                        <td>
+                            <div class="actions">
+                                <a href="{% url 'open_update_restaurant' r.id %}" class="btn btn-outline"
+                                    style="font-size: 0.8rem;">Edit Info</a>
+                                <a href="{% url 'open_update_menu' r.id %}" class="btn btn-outline"
+                                    style="font-size: 0.8rem;">Edit Menu</a>
+                                <a href="{% url 'delete_restaurant' r.id %}" class="btn btn-danger"
+                                    style="font-size: 0.8rem;">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </main>
+</body>
+
+</html>
