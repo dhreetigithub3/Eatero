@@ -23,37 +23,76 @@
     </nav>
 
     <main class="container">
-        <div class="form-card">
+        <div class="form-card" style="max-width: 500px; margin: 2rem auto;">
             <h3 class="text-center mb-2">Create Account</h3>
+            <p class="text-center text-muted mb-2" style="font-size: 0.9rem;">Join the Eatero community today!</p>
+            
             <form action="{% url 'signup' %}" method="POST" novalidate>
                 {% csrf_token %}
                 
-                {% if form.errors %}
+                {% if form.non_field_errors %}
                 <div class="card mb-2" style="border-left: 4px solid var(--primary); background: #fff5f5;">
                     <div class="card-body" style="padding: 1rem; color: var(--primary); font-size: 0.85rem;">
-                        <strong>Please fix the errors below:</strong>
-                        <ul style="margin-top: 0.5rem; padding-left: 1.2rem;">
-                            {% for field, errors in form.errors.items %}
-                                {% for error in errors %}
-                                    <li>{{ error }}</li>
-                                {% endfor %}
-                            {% endfor %}
-                        </ul>
+                        {% for error in form.non_field_errors %}
+                            <p style="margin: 0;">{{ error }}</p>
+                        {% endfor %}
                     </div>
                 </div>
                 {% endif %}
 
-                {% for field in form %}
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
+                        {{ form.username }}
+                        {% if form.username.errors %}
+                            <small style="color: var(--primary);">{{ form.username.errors.0 }}</small>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+                        {{ form.email }}
+                        {% if form.email.errors %}
+                            <small style="color: var(--primary);">{{ form.email.errors.0 }}</small>
+                        {% endif %}
+                    </div>
+                </div>
+
                 <div class="form-group">
-                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                    {{ field }}
-                    {% if field.help_text %}
-                        <small style="color: var(--text-muted);">{{ field.help_text }}</small>
+                    <label for="{{ form.mobile.id_for_label }}">{{ form.mobile.label }}</label>
+                    {{ form.mobile }}
+                    {% if form.mobile.errors %}
+                        <small style="color: var(--primary);">{{ form.mobile.errors.0 }}</small>
                     {% endif %}
                 </div>
-                {% endfor %}
 
-                <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+                <div class="form-group">
+                    <label for="{{ form.address.id_for_label }}">{{ form.address.label }}</label>
+                    {{ form.address }}
+                    {% if form.address.errors %}
+                        <small style="color: var(--primary);">{{ form.address.errors.0 }}</small>
+                    {% endif %}
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label for="{{ form.password.id_for_label }}">{{ form.password.label }}</label>
+                        {{ form.password }}
+                        {% if form.password.errors %}
+                            <small style="color: var(--primary);">{{ form.password.errors.0 }}</small>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.confirm_password.id_for_label }}">{{ form.confirm_password.label }}</label>
+                        {{ form.confirm_password }}
+                        {% if form.confirm_password.errors %}
+                            <small style="color: var(--primary);">{{ form.confirm_password.errors.0 }}</small>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block" style="margin-top: 1rem; padding: 1rem;">
+                    Create Account
+                </button>
             </form>
         </div>
     </main>
