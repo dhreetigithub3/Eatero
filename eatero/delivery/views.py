@@ -45,6 +45,9 @@ def signin(request):
     except Customer.DoesNotExist:
         return render(request, 'fail.html')
 
+def admin_home(request):
+    return render(request, 'admin_home.html')
+
 def open_add_restaurant(request):
     return render(request, 'add_restaurant.html')
 
