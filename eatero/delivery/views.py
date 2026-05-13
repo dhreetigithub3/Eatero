@@ -9,7 +9,7 @@ from .forms import CustomerSignupForm
 # Create your views here.
 def say_hello(request):
     #return HttpResponse("Sy Hello, My app is working")
-    return render(request, "delivery/index.html")
+    return render(request, "index.html")
 
 def open_signup(request):
     return render(request, "signup.html")
