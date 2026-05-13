@@ -1,0 +1,7 @@
+Django==6.0.4
+razorpay==2.0.1
+asgiref==3.11.1
+sqlparse==0.5.5
+requests==2.33.1
+gunicorn
+whitenoise
