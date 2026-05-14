@@ -10,7 +10,7 @@ class Customer(models.Model):
 
 class Restaurant(models.Model):
     name = models.CharField(max_length = 20)
-    picture = models.URLField(max_length = 250, default='https://images.venuebookingz.com/22886-1777034898-wm-triple_eight_bar_(9).jpg')
+    picture = models.URLField(max_length = 400, default='https://images.venuebookingz.com/22886-1777034898-wm-triple_eight_bar_(9).jpg')
     cuisine = models.CharField(max_length = 200)
     rating = models.FloatField()
 
