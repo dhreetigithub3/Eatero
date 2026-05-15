@@ -1,5 +1,6 @@
 # 🍔 Eatero - Modern Food Delivery Platform
 
+https://eatero.onrender.com/
 **Eatero** is a premium, full-stack food delivery application built with Django. It features a stunning, modern user interface, robust administrative controls, and a seamless customer experience with integrated online payments.
 
 ---
