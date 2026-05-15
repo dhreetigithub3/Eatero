@@ -5,6 +5,10 @@
 
 ---
 
+ **Live Demo**
+- https://eatero.onrender.com/
+
+---
 ## ✨ Key Features
 
 ### 🛒 Customer Experience
@@ -60,10 +64,6 @@
    ```bash
    python eatero/manage.py runserver
    ```
-
----
-6. **Live Demo**
-- https://eatero.onrender.com/
 
 ---
 ## 🔒 Security Best Practices Implemented
