@@ -65,6 +65,7 @@
 6. **Live Demo**
 - https://eatero.onrender.com/
 
+---
 ## 🔒 Security Best Practices Implemented
 - [x] Django CSRF Protection on all forms.
 - [x] Robust server-side form validation for user inputs.
